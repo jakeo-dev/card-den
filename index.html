@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Flashcards</title>
+
+    <link href='style.css' rel='stylesheet'>
+    <script src='https://kit.fontawesome.com/57c0dd6a0a.js' crossorigin='anonymous'></script>
+    <link rel='preconnect' href='https://fonts.googleapis.com'>
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+    <link
+        href='https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;500;600;700;800;900&family=Rammetto+One&display=swap'
+        rel='stylesheet'>
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/tota11y/0.1.6/tota11y.min.js' crossorigin='anonymous'
+        referrerpolicy='no-referrer'></script> -->
+    <script async src='https://cdn.splitbee.io/sb.js'></script>
+</head>
+
+<body class='items-center justify-center font-LexendDeca'>
+
+    <!-- <button onclick='localStorage.clear()' class='text-3xl border-4 border-red-500 hover:bg-red-300'>CLEAR
+        EVERYTHING</button> -->
+
+    <div id='cardModal'
+        class='fadeIn bg-orange-300 flex justify-center items-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
+
+        <div class='w-full p-96'>
+            <div class='block'>
+                <div class='flex gap-4 mb-6'>
+                    <button
+                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
+                        onclick='openCard(1)'>Randomize order</button>
+                </div>
+            </div>
+
+            <div
+                class='bg-gray-100 relative flex justify-center items-center rounded-lg w-full shadow-md px-8 md:px-12 md:py-11'>
+                <div class='w-full'>
+                    <button class='absolute top-6 right-7 text-lg hover:text-gray-500 transition-all'
+                        onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
+                    <h1 class='text-base -mt-4' id='positionText'></h1>
+                    <h2 class='text-3xl mt-4' id='cardText'></h2>
+                </div>
+            </div>
+
+            <div class='block'>
+                <div class='flex gap-4 mt-6'>
+                    <button
+                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
+                        onclick='prevCard()'>Previous</button>
+                    <button
+                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
+                        onclick='flipCard()'>Flip</button>
+                    <button
+                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
+                        onclick='nextCard()'>Next</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class='bg-amber-600 w-full rounded-b-xl shadow-md p-5 px-7'>
+        <h1 class='font-RammettoOne text-3xl md:text-4xl text-gray-100 text-left'>Card Den</h1>
+    </div>
+
+    <div class='px-8 pb-32 md:px-12 lg:px-20 xl:px-56 2xl:px-80 md:pb-40'>
+
+        <div class='flex gap-4 mt-8'>
+            <button class='w-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-md px-3 py-2 transition-all'
+                id='studyNormBtn' onclick='openCard(0)'>Study</button>
+        </div>
+
+        <div id='fullCardsList' class='text-lg w-full justify-center gap-4 mt-4'>
+        </div>
+        <div class='flex justify-center items-center'>
+            <button class='bg-gray-200 w-1/2 hover:bg-gray-300 active:bg-gray-400 rounded-md px-3 py-2 transition-all'
+                id='addCardBtn' onclick='addCard()'>Add card</button>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
+
+<script src='script.js'></script>
