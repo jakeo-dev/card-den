@@ -148,7 +148,7 @@ function flipCard() {
 }
 
 function checkString(str) {
-    if (str == '') return 'No Text';
+    if (str == '') return 'No text';
     else return str;
 }
 
@@ -183,9 +183,9 @@ function clickTrash(el) {
             side1 = currentItems[j];
             side2 = currentItems[j + 1];
 
-            side1.id = 'sideOne' + (Number(side1Array.indexOf(side1.text)) + 1);
+            side1.id = 'sideOne' + ((j / 2) + 1);
+            side2.id = 'sideTwo' + ((j / 2) + 1);
             side1.getElementsByClassName('cardText')[0].id = side1.id + 'Text';
-            side2.id = 'sideTwo' + (Number(side2Array.indexOf(side2.text)) + 1);
             side2.getElementsByClassName('cardText')[0].id = side2.id + 'Text';
 
             side1.text = document.getElementById(side1.id + 'Text').value;
