@@ -65,8 +65,8 @@ function addCard() {
     icon = document.createElement('i');
     icon.className = 'text-lg fa-solid fa-trash';
     btn.className = 'opt trash';
-    btn.ariaLabel = 'Remove course';
-    btn.title = 'Remove course';
+    btn.ariaLabel = 'Remove card';
+    btn.title = 'Remove card';
     btn.appendChild(icon);
     optDiv.appendChild(btn);
 
