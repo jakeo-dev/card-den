@@ -1,5 +1,6 @@
 let index = -1;
 let currentSide1Array = [];
+let studyType = 0;
 
 let side1Array;
 if (typeof JSON.parse(localStorage.getItem('side1Array')) != 'undefined' && JSON.parse(localStorage.getItem('side1Array')) != null) {
@@ -34,9 +35,21 @@ getCards();
 
 let numCards = document.getElementsByClassName('cardDiv').length / 2;
 
-function addCard() {
+if (numCards < 1) {
+    disable('studyNormBtn');
+    disable('studyEndlessBtn');
+}
+
+function addCard(text1, text2) {
     numCards = document.getElementsByClassName('cardDiv').length / 2;
     numCards++;
+
+    if (text1 == '' || text1 == null || text1 == undefined) {
+        text1 = 'New card ' + numCards;
+    }
+    if (text2 == '' || text2 == null || text2 == undefined) {
+        text2 = 'New card ' + numCards;
+    }
 
     div = document.createElement('div');
     div.className = 'fullCardDiv';
@@ -45,12 +58,12 @@ function addCard() {
     let side1 = document.createElement('div');
     side1.id = 'sideOne' + numCards;
     side1.className = 'cardDiv';
-    side1.text = 'New card ' + numCards;
+    side1.text = text1;
     textarea = document.createElement('textarea');
     textarea.id = side1.id + 'Text';
     textarea.className = 'cardText text-right';
     textarea.value = side1.text;
-    textarea.placeholder = 'New card ' + numCards;
+    textarea.placeholder = 'Side 1 text';
     textarea.rows = '2';
     side1.appendChild(textarea);
 
@@ -75,12 +88,12 @@ function addCard() {
     let side2 = document.createElement('div');
     side2.id = 'sideTwo' + numCards;
     side2.className = 'cardDiv';
-    side2.text = 'New card ' + numCards;
+    side2.text = text2;
     textarea = document.createElement('textarea');
     textarea.id = side2.id + 'Text';
     textarea.className = 'cardText';
     textarea.value = side2.text;
-    textarea.placeholder = 'New card ' + numCards;
+    textarea.placeholder = 'Side 1 text';
     textarea.rows = '2';
     side2.appendChild(textarea);
 
@@ -103,9 +116,23 @@ function addCard() {
     document.getElementById(side2.id + 'Text').addEventListener('input', textareaHandler);
 
     saveList();
+
+    enable('studyNormBtn');
+    enable('studyEndlessBtn');
 }
 
-function openCard(studyType) {
+function bulkAddCards() {
+    bulkCardsList = document.getElementById('bulkCardsInput').value.split(',');
+    for (let i = 0; i < bulkCardsList.length; i += 2) {
+        let tempSide1 = bulkCardsList[i];
+        let tempSide2 = bulkCardsList[i + 1];
+        if (tempSide2 == undefined) tempSide2 = '';
+        addCard(tempSide1.trim(), tempSide2.trim());
+    }
+    hide();
+}
+
+function openCard(sT) {
     document.getElementById('cardModal').classList.remove('fadeIn');
     document.getElementById('cardModal').classList.add('fadeOut');
 
@@ -113,10 +140,28 @@ function openCard(studyType) {
 
     index = -1;
 
+    studyType = sT;
+
     if (studyType == 0) { // in normal order
         currentSide1Array = side1Array;
+        document.getElementById('positionText').classList.remove('hidden');
+        document.getElementById('randomizeBtn').classList.remove('hidden');
+        document.getElementById('randomizeEndlessBtn').classList.add('hidden');
     } else if (studyType == 1) { // random order
         currentSide1Array = shuffle(side1Array);
+        document.getElementById('positionText').classList.remove('hidden');
+        document.getElementById('randomizeBtn').classList.remove('hidden');
+        document.getElementById('randomizeEndlessBtn').classList.add('hidden');
+    } else if (studyType == 2) { // endless mode
+        currentSide1Array = side1Array;
+        document.getElementById('positionText').classList.add('hidden');
+        document.getElementById('randomizeBtn').classList.add('hidden');
+        document.getElementById('randomizeEndlessBtn').classList.remove('hidden');
+    } else if (studyType == 3) { // random endless mode
+        currentSide1Array = shuffle(side1Array);
+        document.getElementById('positionText').classList.add('hidden');
+        document.getElementById('randomizeBtn').classList.add('hidden');
+        document.getElementById('randomizeEndlessBtn').classList.remove('hidden');
     }
     nextCard();
 
@@ -126,12 +171,20 @@ function openCard(studyType) {
     enable('randomizeBtn');
 }
 
+function openBulkAdd() {
+    document.getElementById('bulkAddModal').classList.remove('fadeIn');
+    document.getElementById('bulkAddModal').classList.add('fadeOut');
+
+    document.getElementsByTagName('body')[0].classList.add('overflow-hidden');
+}
+
 function prevCard() {
-    console.log(index);
     if (index > 0) {
         index--;
         document.getElementById('cardText').innerText = currentSide1Array[index];
-        document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
+        if (studyType == 0 || studyType == 1) {
+            document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
+        }
         enable('flipCardBtn');
         enable('nextCardBtn');
     }
@@ -145,14 +198,24 @@ function nextCard() {
     if (index < currentSide1Array.length - 1) {
         index++;
         document.getElementById('cardText').innerText = currentSide1Array[index];
-        document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
-        enable('prevCardBtn');
+        if (studyType == 0 || studyType == 1) {
+            document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
+        }
+        if (studyType == 0 || studyType == 1) {
+            enable('prevCardBtn');
+        }
     } else {
-        index++;
-        document.getElementById('cardText').innerText = "You've completed studying all of your cards!";
-        document.getElementById('positionText').innerText = '';
-        disable('flipCardBtn');
-        disable('nextCardBtn');
+        if (studyType == 2) {
+            openCard(2);
+        } else if (studyType == 3) {
+            openCard(3);
+        } else {
+            index++;
+            document.getElementById('cardText').innerText = "You've completed studying all of your cards!";
+            document.getElementById('positionText').innerText = '';
+            disable('flipCardBtn');
+            disable('nextCardBtn');
+        }
     }
 }
 
@@ -165,8 +228,7 @@ function flipCard() {
 }
 
 function checkString(str) {
-    if (str == '') return 'No text';
-    else return str;
+    if (str == '') return 'No text'; else return str;
 }
 
 function shuffle(list) {
@@ -214,6 +276,11 @@ function clickTrash(el) {
         numCards = document.getElementsByClassName('cardDiv').length / 2;
 
         saveList();
+
+        if (numCards < 1) {
+            disable('studyNormBtn');
+            disable('studyEndlessBtn');
+        }
     }
 }
 
@@ -243,6 +310,8 @@ function hide() {
 
     document.getElementById('cardModal').classList.add('fadeIn');
     document.getElementById('cardModal').classList.remove('fadeOut');
+    document.getElementById('bulkAddModal').classList.add('fadeIn');
+    document.getElementById('bulkAddModal').classList.remove('fadeOut');
 
     document.getElementsByTagName('body')[0].classList.remove('overflow-hidden');
 

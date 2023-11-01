@@ -25,11 +25,13 @@
 
     <div id='cardModal'
         class='fadeIn bg-indigo-300 flex items-center justify-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
-
         <div class='w-[42rem] px-6'>
+
             <div class='block'>
                 <div class='flex gap-4 mb-6'>
                     <button class='button' onclick='openCard(1)' id='randomizeBtn'><i
+                            class='fa-solid fa-dice-three mr-2'></i>Randomize order</button>
+                    <button class='button' onclick='openCard(3)' id='randomizeEndlessBtn'><i
                             class='fa-solid fa-dice-three mr-2'></i>Randomize order</button>
                 </div>
             </div>
@@ -38,8 +40,8 @@
                 <div class='w-full'>
                     <button class='absolute top-6 right-7 text-lg hover:text-gray-500 transition-all'
                         onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
-                    <h1 class='text-base -mt-4' id='positionText'></h1>
-                    <h2 class='text-3xl mt-4' id='cardText'></h2>
+                    <h1 class='text-base -mt-4 mb-4' id='positionText'></h1>
+                    <h2 class='text-3xl' id='cardText'></h2>
                 </div>
             </div>
 
@@ -52,27 +54,51 @@
                             class='fa-solid fa-arrow-right ml-2'></i></button>
                 </div>
             </div>
-        </div>
 
+        </div>
+    </div>
+
+    <div id='bulkAddModal'
+        class='fadeIn bg-indigo-300/50 flex items-center justify-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
+        <div class='w-[42rem] px-6'>
+
+            <div class='bg-gray-100 relative flex justify-center items-center rounded-lg w-full shadow-md px-12 py-11'>
+                <div class='w-full'>
+                    <button class='absolute top-6 right-7 text-lg hover:text-gray-500 transition-all'
+                        onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
+                    <textarea
+                        placeholder='Enter comma-separated list of cards like this: card 1 side 1, card 1 side 2, card 2 side 1, card 2 side 2, ...'
+                        id='bulkCardsInput'
+                        class='resize-none text-lg w-full border-2 border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-indigo-500 px-4 py-2 transition-all'></textarea>
+                    <button class='button mt-2' onclick='bulkAddCards()' id='bulkAddBtn'><i
+                            class='fa-solid fa-plus mr-2'></i>Bulk add cards</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class='bg-indigo-100 border-b-2 border-indigo-200 w-full shadow-md p-5 px-7'>
         <h1 class='font-RammettoOne text-3xl md:text-4xl text-indigo-600 text-left'>Card Den</h1>
     </div>
 
-    <div class='max-w-3xl mx-auto px-6 pb-32 md:pb-40 pt-6'>
+    <div class='max-w-3xl mx-auto px-6 pb-32 md:pb-40 pt-6 md:pt-10'>
 
         <div class='flex gap-4'>
             <button class='button w-full rounded-md px-3 py-2 transition-all' id='studyNormBtn'
                 onclick='openCard(0)'>Study</button>
+            <button class='button w-full rounded-md px-3 py-2 transition-all' id='studyEndlessBtn'
+                onclick='openCard(2)'>Endless study</button>
         </div>
 
         <div id='fullCardsList' class='text-lg w-full justify-center gap-4 mt-4'>
         </div>
 
-        <div class='flex justify-center items-center'>
+        <div class='flex gap-4'>
             <button class='button w-full md:w-1/2' id='addCardBtn' onclick='addCard()'><i
                     class='fa-solid fa-plus mr-2'></i>Add card</button>
+            <button class='button w-full md:w-1/2' id='addCardBtn' onclick='openBulkAdd()'><i
+                    class='fa-solid fa-plus mr-2'></i>Bulk add cards</button>
         </div>
 
     </div>

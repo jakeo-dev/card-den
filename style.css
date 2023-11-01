@@ -734,12 +734,24 @@ video {
   margin-top: 1.5rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mt-2 {
+  margin-top: 0.5rem;
+}
+
 .block {
   display: block;
 }
 
 .flex {
   display: flex;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-full {
@@ -756,6 +768,10 @@ video {
 
 .max-w-3xl {
   max-width: 48rem;
+}
+
+.resize-none {
+  resize: none;
 }
 
 .items-center {
@@ -786,6 +802,10 @@ video {
   border-width: 4px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-b-2 {
   border-bottom-width: 2px;
 }
@@ -798,6 +818,11 @@ video {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity));
+}
+
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
 .bg-gray-100 {
@@ -813,6 +838,19 @@ video {
 .bg-indigo-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(165 180 252 / var(--tw-bg-opacity));
+}
+
+.bg-indigo-300\/50 {
+  background-color: rgb(165 180 252 / 0.5);
+}
+
+.bg-indigo-800\/50 {
+  background-color: rgb(55 48 163 / 0.5);
+}
+
+.bg-indigo-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(199 210 254 / var(--tw-bg-opacity));
 }
 
 .p-5 {
@@ -849,12 +887,18 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.pb-32 {
-  padding-bottom: 8rem;
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 
-.pt-8 {
-  padding-top: 2rem;
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.pb-32 {
+  padding-bottom: 8rem;
 }
 
 .pt-6 {
@@ -914,18 +958,40 @@ video {
   background-color: rgb(252 165 165 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-gray-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
 .hover\:text-gray-500:hover {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
 }
 
+.focus\:bg-gray-200:focus {
+  --tw-bg-opacity: 1;
+  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.focus\:outline-indigo-500:focus {
+  outline-color: #6366f1;
+}
+
 @media (min-width: 768px) {
+  .md\:mt-12 {
+    margin-top: 3rem;
+  }
+
   .md\:w-1\/2 {
     width: 50%;
   }
 
   .md\:pb-40 {
     padding-bottom: 10rem;
+  }
+
+  .md\:pt-10 {
+    padding-top: 2.5rem;
   }
 
   .md\:text-4xl {
