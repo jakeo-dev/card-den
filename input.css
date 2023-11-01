@@ -4,15 +4,23 @@
 
 @layer components {
   .fullCardDiv {
-    @apply w-full flex justify-center items-center mb-3;
+    @apply w-full flex justify-center items-center mb-2 md:mb-3;
   }
 
   .cardDiv {
-    @apply first:mr-3 last:ml-3;
+    @apply w-full first:mr-2 last:ml-2 md:first:mr-3 md:last:ml-3;
   }
 
   .cardText {
-    @apply resize-none text-lg w-full border-2 rounded-md hover:bg-gray-100 focus:bg-gray-200 px-3 py-1 transition-all;
+    @apply resize-none text-lg w-full border-2 border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-indigo-500 px-3 py-1 transition-all;
+  }
+
+  .button {
+    @apply w-full bg-indigo-700/80 hover:bg-indigo-600/80 active:bg-indigo-500/80 text-white rounded-md px-3 py-2 transition-all;
+  }
+
+  .disabledBtn {
+    @apply bg-indigo-500/80 hover:bg-indigo-500/80 active:bg-indigo-500/80 text-gray-100/80;
   }
 
   .optDiv {

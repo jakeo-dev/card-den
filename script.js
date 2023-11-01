@@ -119,14 +119,25 @@ function openCard(studyType) {
         currentSide1Array = shuffle(side1Array);
     }
     nextCard();
+
+    disable('prevCardBtn');
+    enable('flipCardBtn');
+    enable('nextCardBtn');
+    enable('randomizeBtn');
 }
 
 function prevCard() {
+    console.log(index);
     if (index > 0) {
         index--;
         document.getElementById('cardText').innerText = currentSide1Array[index];
-
         document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
+        enable('flipCardBtn');
+        enable('nextCardBtn');
+    }
+
+    if (index < 1) {
+        disable('prevCardBtn');
     }
 }
 
@@ -134,8 +145,14 @@ function nextCard() {
     if (index < currentSide1Array.length - 1) {
         index++;
         document.getElementById('cardText').innerText = currentSide1Array[index];
-
         document.getElementById('positionText').innerText = (index + 1) + ' of ' + currentSide1Array.length;
+        enable('prevCardBtn');
+    } else {
+        index++;
+        document.getElementById('cardText').innerText = "You've completed studying all of your cards!";
+        document.getElementById('positionText').innerText = '';
+        disable('flipCardBtn');
+        disable('nextCardBtn');
     }
 }
 
@@ -231,4 +248,14 @@ function hide() {
 
     index = -1;
     currentSide1Array = [];
+}
+
+function enable(id) {
+    document.getElementById(id).disabled = false;
+    document.getElementById(id).classList.remove('disabledBtn');
+}
+
+function disable(id) {
+    document.getElementById(id).disabled = true;
+    document.getElementById(id).classList.add('disabledBtn');
 }

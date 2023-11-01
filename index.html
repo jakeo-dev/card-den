@@ -4,7 +4,7 @@
 <head>
     <meta charset='UTF-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Flashcards</title>
+    <title>Card Den</title>
 
     <link href='style.css' rel='stylesheet'>
     <script src='https://kit.fontawesome.com/57c0dd6a0a.js' crossorigin='anonymous'></script>
@@ -18,20 +18,19 @@
     <script async src='https://cdn.splitbee.io/sb.js'></script>
 </head>
 
-<body class='items-center justify-center font-LexendDeca'>
+<body class='bg-gray-100 items-center justify-center font-LexendDeca'>
 
     <!-- <button onclick='localStorage.clear()' class='text-3xl border-4 border-red-500 hover:bg-red-300'>CLEAR
         EVERYTHING</button> -->
 
     <div id='cardModal'
-        class='fadeIn bg-orange-300 flex justify-center items-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
+        class='fadeIn bg-indigo-300 flex items-center justify-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
 
-        <div class='w-full p-6 md:p-36 lg:p-64 xl:p-96'>
+        <div class='w-[42rem] px-6'>
             <div class='block'>
                 <div class='flex gap-4 mb-6'>
-                    <button
-                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
-                        onclick='openCard(1)'>Randomize order</button>
+                    <button class='button' onclick='openCard(1)' id='randomizeBtn'><i
+                            class='fa-solid fa-dice-three mr-2'></i>Randomize order</button>
                 </div>
             </div>
 
@@ -46,38 +45,34 @@
 
             <div class='block'>
                 <div class='flex gap-4 mt-6'>
-                    <button
-                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
-                        onclick='prevCard()'>Previous</button>
-                    <button
-                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
-                        onclick='flipCard()'>Flip</button>
-                    <button
-                        class='w-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 rounded-md py-2 transition-all'
-                        onclick='nextCard()'>Next</button>
+                    <button class='button' onclick='prevCard()' id='prevCardBtn'><i
+                            class='fa-solid fa-arrow-left mr-2'></i>Previous</button>
+                    <button class='button' onclick='flipCard()' id='flipCardBtn'>Flip</button>
+                    <button class='button' onclick='nextCard()' id='nextCardBtn'>Next<i
+                            class='fa-solid fa-arrow-right ml-2'></i></button>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <div class='bg-amber-600 w-full rounded-b-xl shadow-md p-5 px-7'>
-        <h1 class='font-RammettoOne text-3xl md:text-4xl text-gray-100 text-left'>Card Den</h1>
+    <div class='bg-indigo-100 border-b-2 border-indigo-200 w-full shadow-md p-5 px-7'>
+        <h1 class='font-RammettoOne text-3xl md:text-4xl text-indigo-600 text-left'>Card Den</h1>
     </div>
 
-    <div class='px-6 pb-32 md:px-12 lg:px-20 xl:px-56 2xl:px-80 md:pb-40'>
+    <div class='max-w-3xl mx-auto px-6 pb-32 md:pb-40 pt-6'>
 
-        <div class='flex gap-4 mt-8'>
-            <button class='w-full bg-gray-200 hover:bg-gray-300 active:bg-gray-400 rounded-md px-3 py-2 transition-all'
-                id='studyNormBtn' onclick='openCard(0)'>Study</button>
+        <div class='flex gap-4'>
+            <button class='button w-full rounded-md px-3 py-2 transition-all' id='studyNormBtn'
+                onclick='openCard(0)'>Study</button>
         </div>
 
         <div id='fullCardsList' class='text-lg w-full justify-center gap-4 mt-4'>
         </div>
 
         <div class='flex justify-center items-center'>
-            <button class='bg-gray-200 w-1/2 hover:bg-gray-300 active:bg-gray-400 rounded-md px-3 py-2 transition-all'
-                id='addCardBtn' onclick='addCard()'>Add card</button>
+            <button class='button w-full md:w-1/2' id='addCardBtn' onclick='addCard()'><i
+                    class='fa-solid fa-plus mr-2'></i>Add card</button>
         </div>
 
     </div>
