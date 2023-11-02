@@ -317,6 +317,7 @@ function hide() {
 
     index = -1;
     currentSide1Array = [];
+    document.getElementById('bulkCardsInput').value = '';
 }
 
 function enable(id) {
