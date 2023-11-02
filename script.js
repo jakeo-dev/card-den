@@ -122,14 +122,16 @@ function addCard(text1, text2) {
 }
 
 function bulkAddCards() {
-    bulkCardsList = document.getElementById('bulkCardsInput').value.split(',');
-    for (let i = 0; i < bulkCardsList.length; i += 2) {
-        let tempSide1 = bulkCardsList[i];
-        let tempSide2 = bulkCardsList[i + 1];
-        if (tempSide2 == undefined) tempSide2 = '';
-        addCard(tempSide1.trim(), tempSide2.trim());
+    if (!document.getElementById('bulkCardsInput').value == '') {
+        bulkCardsList = document.getElementById('bulkCardsInput').value.split(',');
+        for (let i = 0; i < bulkCardsList.length; i += 2) {
+            let tempSide1 = bulkCardsList[i];
+            let tempSide2 = bulkCardsList[i + 1];
+            if (tempSide2 == undefined) tempSide2 = '';
+            addCard(tempSide1.trim(), tempSide2.trim());
+        }
+        hide();
     }
-    hide();
 }
 
 function openCard(sT) {
@@ -303,6 +305,20 @@ function saveList() {
     localStorage.setItem('fullCardsList', document.getElementById('fullCardsList').innerHTML);
     localStorage.setItem('side1Array', JSON.stringify(side1Array));
     localStorage.setItem('side2Array', JSON.stringify(side2Array));
+}
+
+function copyCards() {
+    final = '';
+    let currentItems = document.getElementsByClassName('cardDiv');
+    for (let i = 0; i < currentItems.length; i += 2) {
+        side1 = currentItems[i];
+        side2 = currentItems[i + 1];
+
+        final = final + ', ' + localStorage.getItem(side1.id + 'Text').split(',').join(';') + ', ' + localStorage.getItem(side2.id + 'Text').split(',').join(';');
+    }
+    navigator.clipboard.writeText(final.replace(', ', ''));
+
+    alert('Copied cards!')
 }
 
 function hide() {

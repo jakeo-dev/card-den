@@ -96,11 +96,16 @@
         <div id='fullCardsList' class='text-lg w-full justify-center gap-4 mt-4'>
         </div>
 
-        <div class='flex gap-4'>
-            <button class='button w-full md:w-1/2' id='addCardBtn' onclick='addCard()'><i
-                    class='fa-solid fa-plus mr-2'></i>Add card</button>
-            <button class='button w-full md:w-1/2' id='addCardBtn' onclick='openBulkAdd()'><i
+        <div class='flex justify-center'>
+            <button class='button' id='addCardBtn' onclick='addCard()'><i class='fa-solid fa-plus mr-2'></i>Add
+                card</button>
+
+        </div>
+        <div class='flex gap-4 mt-4'>
+            <button class='button' id='bulkAddCardsBtn' onclick='openBulkAdd()'><i
                     class='fa-solid fa-plus mr-2'></i>Bulk add cards</button>
+            <button class='button' id='exportCardsBtn' onclick='copyCards()'><i class='fa-solid fa-copy mr-2'></i>Export
+                cards</button>
         </div>
 
     </div>
