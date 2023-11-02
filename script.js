@@ -154,6 +154,7 @@ function openCard(sT) {
         document.getElementById('positionText').classList.remove('hidden');
         document.getElementById('randomizeBtn').classList.remove('hidden');
         document.getElementById('randomizeEndlessBtn').classList.add('hidden');
+        changeDice();
     } else if (studyType == 2) { // endless mode
         currentSide1Array = side1Array;
         document.getElementById('positionText').classList.add('hidden');
@@ -164,6 +165,7 @@ function openCard(sT) {
         document.getElementById('positionText').classList.add('hidden');
         document.getElementById('randomizeBtn').classList.add('hidden');
         document.getElementById('randomizeEndlessBtn').classList.remove('hidden');
+        changeDice();
     }
     nextCard();
 
@@ -176,6 +178,23 @@ function openCard(sT) {
 function openBulkAdd() {
     document.getElementById('bulkAddModal').classList.remove('fadeIn');
     document.getElementById('bulkAddModal').classList.add('fadeOut');
+
+    document.getElementsByTagName('body')[0].classList.add('overflow-hidden');
+}
+
+function openExport() {
+    final = '';
+    let currentItems = document.getElementsByClassName('cardDiv');
+    for (let i = 0; i < currentItems.length; i += 2) {
+        side1 = currentItems[i];
+        side2 = currentItems[i + 1];
+        final = final + ', ' + localStorage.getItem(side1.id + 'Text').split(',').join(';') + ', ' + localStorage.getItem(side2.id + 'Text').split(',').join(';');
+    }
+
+    document.getElementById('exportedText').innerText = final.replace(', ', '');
+
+    document.getElementById('exportModal').classList.remove('fadeIn');
+    document.getElementById('exportModal').classList.add('fadeOut');
 
     document.getElementsByTagName('body')[0].classList.add('overflow-hidden');
 }
@@ -308,17 +327,15 @@ function saveList() {
 }
 
 function copyCards() {
-    final = '';
-    let currentItems = document.getElementsByClassName('cardDiv');
-    for (let i = 0; i < currentItems.length; i += 2) {
-        side1 = currentItems[i];
-        side2 = currentItems[i + 1];
+    navigator.clipboard.writeText(document.getElementById('exportedText').innerText);
+    document.getElementById('copyCardsBtn').innerHTML = `<i class='fa-solid fa-copy mr-2'></i>Copied to clipboard!`;
+}
 
-        final = final + ', ' + localStorage.getItem(side1.id + 'Text').split(',').join(';') + ', ' + localStorage.getItem(side2.id + 'Text').split(',').join(';');
-    }
-    navigator.clipboard.writeText(final.replace(', ', ''));
-
-    alert('Copied cards!')
+function changeDice() {
+    nums = ['one', 'two', 'three', 'four', 'five', 'six'];
+    num = nums[Math.floor(Math.random() * nums.length)];
+    document.getElementById('randomizeBtn').innerHTML = `<i class='fa-solid fa-dice-${num} mr-2'></i>Randomize order`;
+    document.getElementById('randomizeEndlessBtn').innerHTML = `<i class='fa-solid fa-dice-${num} mr-2'></i>Randomize order`;
 }
 
 function hide() {
@@ -328,12 +345,15 @@ function hide() {
     document.getElementById('cardModal').classList.remove('fadeOut');
     document.getElementById('bulkAddModal').classList.add('fadeIn');
     document.getElementById('bulkAddModal').classList.remove('fadeOut');
+    document.getElementById('exportModal').classList.add('fadeIn');
+    document.getElementById('exportModal').classList.remove('fadeOut');
 
     document.getElementsByTagName('body')[0].classList.remove('overflow-hidden');
 
     index = -1;
     currentSide1Array = [];
     document.getElementById('bulkCardsInput').value = '';
+    document.getElementById('copyCardsBtn').innerHTML = `<i class='fa-regular fa-copy mr-2'></i>Copy to clipboard`;
 }
 
 function enable(id) {

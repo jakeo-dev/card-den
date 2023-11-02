@@ -37,12 +37,12 @@
             </div>
 
             <div
-                class='bg-gray-100 relative flex justify-center items-center rounded-lg w-full shadow-md px-8 py-8 md:px-12 md:py-11'>
+                class='bg-gray-100 relative w-full h-[25rem] flex justify-center items-center rounded-lg shadow-md px-8 py-8 md:px-12 md:py-11'>
                 <div class='w-full'>
                     <button class='absolute top-6 right-7 text-lg hover:text-gray-500 transition-all'
                         onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
-                    <h1 class='text-base -mt-4 mb-4' id='positionText'></h1>
-                    <h2 class='text-3xl' id='cardText'></h2>
+                    <h1 class='absolute text-base top-7 left-7' id='positionText'></h1>
+                    <h2 class='text-3xl text-center' id='cardText'></h2>
                 </div>
             </div>
 
@@ -70,10 +70,29 @@
                         onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
                     <textarea
                         placeholder='Enter comma-separated list of cards like this: card 1 side 1, card 1 side 2, card 2 side 1, card 2 side 2, ...'
-                        id='bulkCardsInput'
-                        class='resize-none md:text-lg w-full border-2 border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-indigo-500 px-4 py-2 transition-all'></textarea>
+                        id='bulkCardsInput' rows='4'
+                        class='resize-none md:text-lg w-full border-2 border-gray-300 rounded-md bg-gray-100 hover:bg-gray-200 focus:bg-gray-200 focus:outline-indigo-500 px-4 py-2 md:px-6 md:py-4 transition-all'></textarea>
                     <button class='button mt-2' onclick='bulkAddCards()' id='bulkAddBtn'><i
                             class='fa-solid fa-plus mr-2'></i>Bulk add cards</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id='exportModal'
+        class='fadeIn bg-indigo-300/50 flex items-center justify-center fixed top-0 left-0 z-30 w-full h-full overflow-hidden'>
+        <div class='w-[42rem] px-6'>
+
+            <div
+                class='bg-gray-100 relative flex justify-center items-center rounded-lg w-full shadow-md px-8 py-8 md:px-12 md:py-11'>
+                <div class='w-full'>
+                    <button class='absolute top-6 right-7 text-lg hover:text-gray-500 transition-all'
+                        onclick='hide()'><i class='fa-solid fa-xmark' aria-label='Close' title='Close'></i></button>
+                    <h1 class='md:text-lg border-2 border-gray-300 rounded-md px-4 py-2 md:px-6 md:py-4'
+                        id='exportedText'></h1>
+                    <button class='button mt-4' onclick='copyCards()' id='copyCardsBtn'><i
+                            class='fa-regular fa-copy mr-2'></i>Copy to clipboard</button>
                 </div>
             </div>
 
@@ -104,8 +123,8 @@
         <div class='flex gap-4 mt-4'>
             <button class='button' id='bulkAddCardsBtn' onclick='openBulkAdd()'><i
                     class='fa-solid fa-plus mr-2'></i>Bulk add cards</button>
-            <button class='button' id='exportCardsBtn' onclick='copyCards()'><i class='fa-solid fa-copy mr-2'></i>Export
-                cards</button>
+            <button class='button' id='openExportBtn' onclick='openExport()'><i
+                    class='fa-regular fa-copy mr-2'></i>Export cards</button>
         </div>
 
     </div>
